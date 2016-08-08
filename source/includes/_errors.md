@@ -1,20 +1,44 @@
 # Errors
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
+Когда какой-либо из запросов не выполнен в результате возникновения ошибки, в теле ответа содержится детализация ошибки в <font color="#14CB79">JSON</font> формате.
 
-The Kittn API uses the following error codes:
+```json
+
+{"result": "fail", "message": "Permission denied", "body": []}
 
 
-Error Code | Meaning
+
+{"result": "fail", "message": "{'phone_number': ['Enter a valid mobile number.']}"}
+
+
+
+{"result": "fail", "message": "ActivationCode matching query does not exist."}
+
+
+{"result": "fail", "message": "Incorrect phone_number or credentials", 
+"sessionid": ""}
+
+{"result": "fail", "message": "['ActivationCode does not exist or expire']"}
+
+
+{"result": "fail", "message": "That page contains no results", 
+"paging": {"pages": 1, "page": "2"}, "body": []}
+
+
+{"result": "fail", "message": "Device is blocked"}
+
+{"result": "fail","message": "Device has no mobile app"}
+```
+
+
+
+Ошибка | Значение
 ---------- | -------
-400 | Bad Request -- Your request sucks
-401 | Unauthorized -- Your API key is wrong
-403 | Forbidden -- The kitten requested is hidden for administrators only
-404 | Not Found -- The specified kitten could not be found
-405 | Method Not Allowed -- You tried to access a kitten with an invalid method
-406 | Not Acceptable -- You requested a format that isn't json
-410 | Gone -- The kitten requested has been removed from our servers
-418 | I'm a teapot
-429 | Too Many Requests -- You're requesting too many kittens! Slow down!
-500 | Internal Server Error -- We had a problem with our server. Try again later.
-503 | Service Unavailable -- We're temporarially offline for maintanance. Please try again later.
+Permission denied | У пользователя недостаточно прав при обращении к ресурсу или истекло время жизни сессии.
+Enter a valid mobile number | Указан некорректный номер телефона.
+ActivationCode matching query does not exist | Код активации мобильного устройства не найден.
+Incorrect phone_number or credentials | При попытке аутентификации указан не верный номер телефона или пароль в поле credentials.
+ActivationCode does not exist or expire | Не валидный код подтверждения.
+That page contains no results | Попытка запросить не существующую страницу.
+Device is blocked | На любой запрос авторизованного устройства, если он был заблокирован администратором.
+Device has no mobile app | Попытка выполнить запрос с удаленного приложения.
