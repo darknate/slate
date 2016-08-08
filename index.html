@@ -4,10 +4,8 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>TIM Connect SDK</title>
 
-    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
@@ -88,10 +86,12 @@
   color: #90a959;
 }
     </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;]">
+  <body class="index" data-languages="[&quot;code&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -101,9 +101,7 @@
     <div class="tocify-wrapper">
       <img src="images/logo.png" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
+              <a href="#" data-language-name="code">code</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -112,235 +110,900 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='#'>Запросить API ключ</a></li>
             <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="introduction">Introduction</h1>
+        <h1 id="1">Введение</h1>
 
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
-
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p>This example API documentation page was created with <a href="https://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
-
-<h1 id="authentication">Authentication</h1>
-
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-
-<blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-<h1 id="kittens">Kittens</h1>
-
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint retrieves all kittens.</p>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
-
-<h3 id="query-parameters">Query Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
+<p>Комплект средств разработки <font color="#158EDC">TIM Connect</font> - это способ взаимодействия с сервисом на основе следующих возможностей:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="nt">"resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIM Connect"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.7.1"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"contact"</span><span class="p">:</span><span class="w"> </span><span class="s2">"support@tim-connect.com"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves a specific kitten.</p>
+<ul>
+<li>регистрация и авторизация устройства в сервисе;</li>
+<li>получение и обработка PUSH-уведомлений, проходящих через СМСЦ сервиса;</li>
+<li>доступ к архиву сообщений пользователя, проходящих через СМСЦ сервиса;</li>
+<li>визуализация информации, предоставленной в сообщениях;</li>
+<li>доступ к статистическим данным, формируемым пользователями сервиса;</li>
+<li>формирование данных о геолокации и персональных маркеров сообщений (хэштеги).</li>
+</ul>
 
-<aside class="warning">Inside HTML code blocks like this one, you can&rsquo;t use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<p><img align=center src=images/splash.png></p>
 
-<h3 id="http-request">HTTP Request</h3>
+<h1 id="2">Краткая сводка</h1>
 
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<p>В рамках использования SDK можно выделить общую структуру данных, которая будет обрабатываться одинаково на всех мобильных платформах устройств. Сервис предоставляет информацию, которая не является закрытой информацией банка с точки зрения дублирования SMS. Однако, предполагается, что данные из PUSH-уведомлений будут хранится во внутренней памяти телефона в зашифрованном виде на уровне приложения, а код обфусцирован (в случае с ОС Android).</p>
 
-<h3 id="url-parameters">URL Parameters</h3>
+<h2 id="2.1">Минимальные требования</h2>
+
+<aside class="warning">
+SDK TIM Connect требует выполнение следующих шагов интеграции:
+</aside>
+
+<ol>
+<li>Прием PUSH-уведомлений с сервера и отображение в центре уведомлений ОС;</li>
+<li>Сохранение и вывод сообщений в ленте уведомлений внутри приложения;</li>
+<li>Двусторонний звонок в приложение.
+<p>Корректная работа сервисов возможно только при выполнении всех трех шагов интеграции.</p></li>
+</ol>
+
+<h2 id="2.2">Рекомендации по интеграции</h2>
+
+<p>Выделяются две ключевых схемы интеграции SDK - за зоной авторизации приложения и после нее. Так как SDK дает возможность визуализировать текст, получаемый ранее протоколом SMS, то в принудительном отображении всего контента только после авторизации в мобильном банке нет смысла. В этом случае пользователю дополнительно необходимо будет каждый раз проходить авторизацию в мобильном банке, чтобы посмотреть ленту уведомлений. Создайте отдельный раздел на главном экране приложения, после перехода в который отобразиться контент уведомлений банка. Для предохранения от доступа к устройству третьих лиц используется локальный пароль и/или функции проверки отпечатков пальца. 
+<p>Регистрация в сервисе <font color="#158EDC">TIM Connect</font> выполняется двумя путями на выбор: разовой подпиской пользователя на получение PUSH-уведомлений с верификацией номера телефона одноразовым SMS с кодом подтверждения, либо подписью запроса на регистрацию сервером банка перед передачей в <font color="#158EDC">TIM Connect</font>. Примеры обеих способов:</p></p>
+
+<ol>
+<li>В мобильном банке присутствует раздел «Настройки». На этом экране добавляется переключатель с подписью «Получать PUSH-уведомления вместо SMS».</li>
+</ol>
+
+<p><img src=images/switch.png></p>
+
+<p>При активации пользователю предлагается ввести номер телефона, на который отправляется одноразовый код. В дальнейшем код используется как пароль к сервису TIM и является методом верификации владельца номера телефона. После успешного ввода кода клиент сможет выполнить любой метод из SDK. Если номер телефона заранее известен мобильному приложению, или можно получить его с помощью API банка, то на усмотрение разработчика он передается в метод регистрации SDK без участия пользователя.</p>
+
+<ol>
+<li>Используя второй способ банк заранее верифицирует номер телефона пользователя в приложении мобильного банка (например, при каждом входе в мобильный банк приходит код подтверждения в SMS). таком случае дополнительная верификация номера телефона с еще одним кодом в SMS выглядит непонятно для пользователя. Проще говоря, выбирая второй способ, банк гарантирует, что указанный номер телефона принадлежит владельцу регистрируемого устройства. Для такого типа взаимодействия банк регистрирует пользователя в <font color="#158EDC">TIM Connect</font> без непосредственного участия самого пользователя, выполнив необходимые действия на стороне своего сервера. При включении переключателя, как в первом примере, приложение отправляет полученный от устройства PUSH-токен на сервер банка (а так же остальную необходимую информацию). На этом этапе у банка появляется возможность сохранять PUSH-токены на своей стороне, если это требуется. Сервер банка подписывает запрос шифрованием SHA256 (алгоритм направляется по запросу) и передает получившийся &ldquo;digest&rdquo; обратно в приложение: (номер телефона + токен + digest). Приложение передает эти данные в SDK, после чего они отправляются в TIM Connect, где проверяется подпись, и в случае успеха создается новая учетная запись. Этот способ подразумевает минимальные доработки со стороны банка, перекладывая взаимодействие внутрь SDK.
+<p>
+Примеры визуального отображения сервисов доступы в отдельном разделе «Рекомендации интеграции SDK TIM Connect в мобильные банки».</p></li>
+</ol>
+
+<p>Схема взаимодействия без участия пользователя</p>
+
+<p><img src=images/shascheme.png></p>
+
+<h2 id="2.3">Справочник категорий СМС</h2>
+
+<p>Данный справочник используется во всех сообщениях сервиса.</p>
 
 <table><thead>
 <tr>
-<th>Parameter</th>
-<th>Description</th>
+<th>ID</th>
+<th>Наименование</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>1</td>
+<td>Другое</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Автомобиль</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Бизнес</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Все для дома</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Домашние животные</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Здоровье и красота</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Кафе и рестораны</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Коммунальные платежи</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Кредиты</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Налоги и штрафы</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Транспорт</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Одежда</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Путешествия</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Переводы</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Развелечения</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Связь, интернет и TV</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Снятие наличных</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Супермаркет</td>
 </tr>
 </tbody></table>
 
+<p>*По запросу <font color="#158EDC">TIM Connect</font> может предоставить набор иконок для списка категорий, используемых в собственных приложениях.</p>
+
+<p>Логотипы мест покупок имеют прозрачную основу и подготовлены для отображения на белом фоне экрана. Размер логотипов не превышает 300х300 пикселей, однако возможны редкие исключения для непопулярных мест. Размер холста не всегда имеет одинаковое соотношение сторон, т.е. логотипы не всегда будут квадратные, учитывая прозрачный фон.</p>
+
+<h1 id="3">Android</h1>
+
+<h2 id="3.1">Подготовка проекта</h2>
+
+<p>Первым шагом в Manifest.xml добавляются разрешения.</p>
+
+<blockquote>
+<p>Разрешения в Manifest.xml:</p>
+</blockquote>
+<pre class="highlight xml"><code><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.INTERNET"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.ACCESS_NETWORK_STATE"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.ACCESS_WIFI_STATE"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.WRITE_EXTERNAL_STORAGE"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.GET_ACCOUNTS"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.WAKE_LOCK"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.VIBRATE"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"com.timconnect.sdk.permission.C2D_MESSAGE"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"com.google.android.c2dm.permission.RECEIVE"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;permission</span> <span class="na">android:name=</span><span class="s">"com.timconnect.sdk.permission.C2D_MESSAGE"</span>
+<span class="na">android:protectionLevel=</span><span class="s">"signature"</span><span class="nt">/&gt;</span>
+</code></pre>
+
+<blockquote>
+<p>Код в тег Application в файле Manifest.xml:</p>
+</blockquote>
+<pre class="highlight xml"><code>
+<span class="nt">&lt;service</span>
+<span class="na">android:name=</span><span class="s">" название.вашего.пакета.utils.push.GCMIntentService"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;receiver</span> <span class="na">android:name=</span><span class="s">"com.google.android.gcm.GCMBroadcastReceiver"</span>
+<span class="na">android:permission=</span><span class="s">"com.google.android.c2dm.permission.SEND"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;intent-filter&gt;</span> 
+      <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">"com.google.android.c2dm.intent.RECEIVE"</span><span class="nt">/&gt;</span>
+       <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">"com.google.android.c2dm.intent.REGISTRATION"</span><span class="nt">/&gt;</span>
+       <span class="nt">&lt;category</span> <span class="na">android:name=</span><span class="s">" название.вашего.пакета "</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;/intent-filter&gt;</span>
+<span class="nt">&lt;/receiver&gt;</span>
+</code></pre>
+
+<blockquote>
+<p>&ldquo;название.вашего.пакета&rdquo;&ldquo; необходимо заменить на соответствующий packageId Вашего приложения.</p>
+</blockquote>
+
+<p><br><br><br>
+<p>Затем добавляем в тег Application в файле Manifest.xml добавляем код для работы SDK.</p></p>
+
+<p><br><br><br>
+Копируем содержимое папки lib  в одноименную папку, находящуюся в директории проекта.
+Копируем папку utils в папку «название/вашего/пакета».</p>
+
+<blockquote>
+<p>Код в блок dependencies:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>compile fileTree(dir: 'libs', include: ['*.jar'])
+compile(name:'timConnectSdk', ext:'aar')
+{
+    transitive = true
+}
+</code></pre>
+
+<blockquote>
+<p>Код в блок android:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>packagingOptions {
+exclude ‘META-INF/LICENCE’
+exclude ‘META-INF/NOTICE}
+sourceSets {
+    main 
+        jniLibs.srcDirs = ['libs']
+    }
+}
+</code></pre>
+
+<p><br><br><br>
+В файле build.gradle в блоки dependencies и andorid соответствующий код.
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+Общие моменты по работе с SDK:
+Кеширование получаемых данных с серверов <font color="#158EDC">Tim Connect</font> не производится.
+Проверить результат запроса к серверу можно вызвав метод success() класса BaseServerResponse.
+По умолчанию SDK не выводит нативных PUSH уведомлений, только принимает.
+SDK предоставляет ответ от сервера на любой из доступных запросов в формате String.
+Для идентификации ошибок на этапе внедрение можно использовать класс Logger. Метод enableLog() включает логирование. Например, этот метод срабатывает в случае успешной и не успешной регистрации устройства в GCM или в случае получения устройством PUSH уведомления.</p>
+
+<p><br><br></p>
+
+<p>Ключ API при регистрации в сервисе выдается по запросу.</p>
+
+<h2 id="3.2">Создание ключей в Google Developer Console</h2>
+<pre class="highlight shell"><code><span class="k">*</span> 95.213.198.4 
+<span class="k">*</span> 95.213.198.5 
+<span class="k">*</span> 95.213.130.70 
+<span class="k">*</span> 93.190.105.145 
+<span class="k">*</span> 95.213.130.66 
+<span class="k">*</span> 95.213.130.69 
+<span class="k">*</span> 46.182.28.194 
+<span class="k">*</span> 46.182.28.195
+</code></pre>
+
+<p>Для создания серверного ключа необходимо перейти по ссылке в <a href=https://console.cloud.google.com/>Google API Console</a> и выбрать проект (или создать новый).</p>
+
+<p>В левом верхнем углу нажать на кнопку меню и выбрать «Диспетчер API», перейти на вкладку «Учетные данные». Нажать «Создать учетные данные», выбрать «Ключ API», выбрать «Ключ Сервера», задать название ключа и IP адреса серверов <font color="#158EDC">TIM Connect</font>.</p>
+
+<p>Получившийся ключ API необходимо передать в <font color="#158EDC">TIM Connect.</font></p>
+
+<h2 id="3.3">Авторизация на сервере TIM</h2>
+
+<blockquote>
+<p>Пример установки ключей и проверки регистрации в GCM:</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">mTimConnectSdk</span> <span class="o">=</span> <span class="n">TimConnectSdk</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">getApplicationContext</span><span class="o">());</span>
+<span class="n">mTimConnectSdk</span><span class="o">.</span><span class="na">setAppkey</span><span class="o">(</span><span class="n">APP_KEY</span><span class="o">);</span>
+<span class="n">mTimConnectSdk</span><span class="o">.</span><span class="na">setPushSenderId</span><span class="o">(</span><span class="n">PUSH_SENDER_ID</span><span class="o">);</span>
+
+<span class="kd">final</span> <span class="n">PushController</span> <span class="n">controller</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PushController</span><span class="o">(</span><span class="n">getApplicationContext</span><span class="o">());</span>
+<span class="n">controller</span><span class="o">.</span><span class="na">setPushDataLoadedListener</span><span class="o">(</span><span class="k">new</span> <span class="n">SimpleJacksonRequestListener</span><span class="o">&lt;</span><span class="n">TemplateServerResponse</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;&gt;()</span>
+<span class="o">{</span>
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">onResponse</span><span class="o">(</span><span class="n">TemplateServerResponse</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;</span> <span class="n">response</span><span class="o">,</span> <span class="kt">int</span> <span class="n">statusCode</span><span class="o">,</span> <span class="n">VolleyError</span> <span class="n">error</span><span class="o">)</span>
+  <span class="o">{</span>
+    <span class="c1">// when Push notification arrives, sdk will automatically call loadMessageByID method and this listener will be called</span>
+  <span class="o">}</span>
+<span class="o">});</span>
+
+<span class="n">controller</span><span class="o">.</span><span class="na">setDeliveryReportListener</span><span class="o">(</span><span class="k">new</span> <span class="n">SimpleJacksonRequestListener</span><span class="o">&lt;</span><span class="n">BaseServerResponse</span><span class="o">&gt;()</span> <span class="o">{</span>
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">onResponse</span><span class="o">(</span><span class="n">BaseServerResponse</span> <span class="n">response</span><span class="o">,</span> <span class="kt">int</span> <span class="n">statusCode</span><span class="o">,</span> <span class="n">VolleyError</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+  <span class="c1">// when Push notification arrives, sdk will automatically call loadMessageByID method. After that, SDK will send delivery report to Tim Connect server</span>
+  <span class="c1">// and this listener will be called</span>
+  <span class="o">}</span>
+<span class="o">});</span>
+
+<span class="n">controller</span><span class="o">.</span><span class="na">setRegistrationListener</span><span class="o">(</span><span class="k">new</span> <span class="n">PushController</span><span class="o">.</span><span class="na">GCMRegistrationListener</span><span class="o">()</span> <span class="o">{</span>
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">onRegistered</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+  <span class="o">}</span>
+<span class="o">});</span>
+
+</code></pre>
+
+<p>Перед авторизацией необходимо удостовериться в том, что устройство зарегистрировано в <font color="#14CB79">GCM</font> и приложение успешно получило PUSH-токен. Следующим шагом необходимо указать <font color="#158EDC">PUSH_SENDER_ID</font> (номер проекта в <font color="#14CB79">Google Console</font>) и <font color="#158EDC">APP_KEY</font>. </p>
+
+<blockquote>
+<p>Метод отправки номера телефона:</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">mTimConnectSdk</span><span class="o">.</span><span class="na">setPhone</span><span class="o">(</span><span class="n">PHONE</span><span class="o">);</span>
+<span class="n">mTimConnectSdk</span><span class="o">.</span><span class="na">authByPhone</span><span class="o">(</span><span class="k">new</span> <span class="n">SimpleJacksonRequestListener</span><span class="o">&lt;</span><span class="n">BaseServerResponse</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="nd">@Overridepublic</span> <span class="kt">void</span> <span class="n">onResponse</span><span class="o">(</span><span class="n">BaseServerResponse</span> <span class="n">response</span><span class="o">,</span> <span class="kt">int</span> <span class="n">statusCode</span><span class="o">,</span> <span class="n">VolleyError</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+<span class="o">}});}</span>
+</code></pre>
+
+<blockquote>
+<p>Метод подтверждения номера с помощью SMS:</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">mTimConnectSdk</span><span class="o">.</span><span class="na">setActivationCode</span><span class="o">(</span><span class="n">code</span><span class="o">);</span>
+<span class="n">mTimConnectSdk</span><span class="o">.</span><span class="na">confirmPhone</span><span class="o">(</span><span class="k">new</span> <span class="n">SimpleJacksonRequestListener</span><span class="o">&lt;</span><span class="n">SessionResponse</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="nd">@Overridepublic</span> <span class="kt">void</span> <span class="n">onResponse</span><span class="o">(</span><span class="n">SessionResponse</span> <span class="n">response</span><span class="o">,</span> <span class="kt">int</span> <span class="n">statusCode</span><span class="o">,</span> <span class="n">VolleyError</span> <span class="n">error</span><span class="o">)</span> <span class="o">{}});</span>
+</code></pre>
+
+<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+
+<p>Для регистрация доступны два запроса: с кодом подтверждения по SMS и без. </p>
+
+<p>Регистрация с кодом подтверждения по SMS проходит в 2 этапа:
+* сперва необходимо отправить номер телефона:
+* затем подтвердить номер телефона с помощью кода, полученного в SMS:</p>
+
+<p><br><br></p>
+
+<p>Подобная авторизация более не требуется - механизм сохранения необходимых файлов cookie реализован внутри SDK.</p>
+
+<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+
+<blockquote>
+<p>Инициализация метода authWithoutSmsL:</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">inal</span> <span class="n">AuthWithoutSms</span> <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AuthWithoutSms</span><span class="o">();</span>
+<span class="n">data</span><span class="o">.</span><span class="na">phone_number</span> <span class="o">=</span> <span class="s">"phone_number_here"</span><span class="o">;</span>
+<span class="n">data</span><span class="o">.</span><span class="na">digest</span> <span class="o">=</span> <span class="s">"sha256_digest"</span><span class="o">;</span>
+
+<span class="n">data</span><span class="o">.</span><span class="na">device</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Device</span><span class="o">();</span>
+<span class="n">data</span><span class="o">.</span><span class="na">device</span><span class="o">.</span><span class="na">app_key</span> <span class="o">=</span> <span class="s">"application_key"</span><span class="o">;</span>
+<span class="n">data</span><span class="o">.</span><span class="na">device</span><span class="o">.</span><span class="na">token</span> <span class="o">=</span> <span class="s">"GCM_token"</span><span class="o">;</span>
+</code></pre>
+
+<blockquote>
+<p>Вызов метода для регистрации без SMS:</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">mTimConnectSdk</span><span class="o">.</span><span class="na">authWithoutSms</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="k">new</span> <span class="n">SimpleJacksonRequestListener</span><span class="o">&lt;</span><span class="n">BaseServerResponse</span><span class="o">&gt;()</span> <span class="o">{</span>
+           <span class="nd">@Override</span>
+           <span class="kd">public</span> <span class="kt">void</span> <span class="n">onResponse</span><span class="o">(</span><span class="n">BaseServerResponse</span> <span class="n">response</span><span class="o">,</span> <span class="kt">int</span> <span class="n">statusCode</span><span class="o">,</span> <span class="n">VolleyError</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+               <span class="n">Logger</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="s">"auth"</span><span class="o">);</span>
+           <span class="o">}</span>
+       <span class="o">});</span>
+</code></pre>
+
+<p>Регистрация без кода подтверждения в SMS выполняется одним методом. Сначала необходимо инициализировать объект <code>AuthWithoutSms</code>, а затем вызвать одноименный метод SDK, передав объект в качестве параметра.</p>
+
+<aside class="notice">
+Обратите внимание, что генерация digest должна проходить вне мобильного приложения, иначе алгоритм и секретный код может быть скомпрометирован.
+</aside>
+
+<h2 id=3.4>Вывод уведомлений</h2>
+
+<blockquote>
+<p>Пример вывода нативного уведомления:</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">displayNotification</span><span class="p">(</span><span class="kd">final</span> <span class="n">Message</span> <span class="n">message</span><span class="o">)</span>
+  <span class="o">{</span>
+      <span class="kd">final</span> <span class="n">Intent</span> <span class="n">intent</span> <span class="o">=</span> <span class="n">getNotificationStartIntent</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">message</span><span class="o">);</span>
+      <span class="kd">final</span> <span class="n">PendingIntent</span> <span class="n">pIntent</span> <span class="o">=</span> <span class="n">PendingIntent</span><span class="o">.</span><span class="na">getActivity</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">intent</span><span class="o">,</span> <span class="n">PendingIntent</span><span class="o">.</span><span class="na">FLAG_ONE_SHOT</span><span class="o">);</span>
+        <span class="kd">final</span> <span class="n">Notification</span><span class="o">.</span><span class="na">Builder</span> <span class="n">builder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Notification</span><span class="o">.</span><span class="na">Builder</span><span class="o">(</span><span class="n">context</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">setContentText</span><span class="o">(</span><span class="n">message</span><span class="o">.</span><span class="na">message</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">setTicker</span><span class="o">(</span><span class="n">message</span><span class="o">.</span><span class="na">message</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">setContentIntent</span><span class="o">(</span><span class="n">pIntent</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">setDefaults</span><span class="o">(</span><span class="n">Notification</span><span class="o">.</span><span class="na">DEFAULT_ALL</span><span class="o">);</span>
+
+
+          <span class="n">builder</span><span class="o">.</span><span class="na">setSmallIcon</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">ic_notif_logo</span><span class="o">);</span>
+          <span class="k">if</span> <span class="o">(</span><span class="n">Build</span><span class="o">.</span><span class="na">VERSION</span><span class="o">.</span><span class="na">SDK_INT</span> <span class="o">&gt;</span> <span class="n">Build</span><span class="o">.</span><span class="na">VERSION_CODES</span><span class="o">.</span><span class="na">ICE_CREAM_SANDWICH_MR1</span><span class="o">)</span>
+          <span class="o">{</span>
+            <span class="n">builder</span><span class="o">.</span><span class="na">setPriority</span><span class="o">(</span><span class="n">Notification</span><span class="o">.</span><span class="na">PRIORITY_MAX</span><span class="o">);</span>
+            <span class="n">noti</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
+          <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">noti</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="na">getNotification</span><span class="o">();</span>
+          <span class="o">}</span>
+  <span class="o">}</span>
+
+</code></pre>
+
+<p>Уведомления выводятся в качестве <font color="#158EDC">Notification</font>.</p>
+
+<p>Чтобы организовать вывод уведомлений на экран, необходимо использовать класс <font color="#158EDC">PushController</font>. Наследовав класс и переопределив метод <font color="#158EDC">displayNotification()</font>, можно вывести нативное уведомление как показано в примере.</p>
+
+<blockquote>
+<p>Класс CallsController:</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">mController</span> <span class="o">=</span> <span class="n">mTimConnectSdk</span><span class="o">.</span><span class="na">getCallsController</span><span class="o">();</span>
+<span class="n">mController</span><span class="o">.</span><span class="na">setUserPhone</span><span class="o">(</span><span class="s">"79636125131"</span><span class="o">);</span>
+<span class="n">mController</span><span class="o">.</span><span class="na">setDestinationPhone</span><span class="o">(</span><span class="s">"74953693038"</span><span class="o">);</span>
+<span class="n">mController</span><span class="o">.</span><span class="na">setCallStateListener</span><span class="o">(</span><span class="k">new</span> <span class="n">CallsController</span><span class="o">.</span><span class="na">CallStateListener</span><span class="o">()</span>
+</code></pre>
+
+<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+
+<p>Для работы со звонками необходимо использовать класс <font color="#158EDC">CallsController</font>.
+Перед началом работы необходимо передать номер телефона текущего пользователя, номер телефона, на который необходимо звонить, а так же можно задать слушателя, с помощью которого можно отслеживать состояние звонка.</p>
+
+<h2 id="3.5">Описание методов SDK</h2>
+
+<p>Класс <font color="#158EDC">TimConnectSdk</font> предоставляет методы:</p>
+
+<p><font color="#158EDC">requestMessagesQueue()</font>
+Получение сообщений, которые находятся в очереди (новые сообщения, для которых не был отправлен deliveryReport);</p>
+
+<blockquote>
+<p>Пример requestMessagesByDates:</p>
+</blockquote>
+<pre class="highlight java"><code><span class="kd">final</span> <span class="n">ByDatesParams</span> <span class="n">params</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByDatesParams</span><span class="o">();</span>
+<span class="n">params</span><span class="o">.</span><span class="na">start_date</span> <span class="o">=</span> <span class="s">"2015-01-01"</span><span class="o">;</span>
+<span class="n">params</span><span class="o">.</span><span class="na">end_date</span> <span class="o">=</span> <span class="s">"2030-01-01"</span><span class="o">;</span>
+<span class="n">params</span><span class="o">.</span><span class="na">delivered</span> <span class="o">=</span> <span class="s">"true"</span><span class="o">;</span>
+</code></pre>
+
+<p><font color="#158EDC">requestMessagesByDates()</font>
+Получение истории сообщений. С помощью объекта ByDatesParams можно указать границы временного интервала. </p>
+
+<p><font color="#158EDC">loadMessageById()</font>
+Получение сообщения по ID. В «колбэке» возвращает объект типа Message.</p>
+
+<p><font color="#158EDC">tryAuthUser()</font>
+Запрос обновит сессию для дальнейшей работы API TIM Connect.</p>
+
+<p><font color="#158EDC">setHashtag()</font>
+Устанавливает hastag для сообщения по его ID. Первым параметром необходимо передать ID сообщения, вторым в формате String - сам хэштег. Для удаления хэштега необходимо передать пустую строку “”.</p>
+
+<blockquote>
+<p>Пример unregisterDevice:</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">mApi</span><span class="o">.</span><span class="na">unregisterDevice</span><span class="o">(</span><span class="k">new</span> <span class="n">SimpleJacksonRequestListener</span><span class="o">&lt;</span><span class="n">BaseServerResponse</span><span class="o">&gt;()</span>
+      <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="n">onResponse</span><span class="o">(</span><span class="n">BaseServerResponse</span> <span class="n">response</span><span class="o">,</span> <span class="kt">int</span> <span class="n">statusCode</span><span class="o">,</span> <span class="n">VolleyError</span> <span class="n">error</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">response</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">response</span><span class="o">.</span><span class="na">success</span><span class="o">())</span>
+                <span class="n">Logger</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="s">"device unregistered"</span><span class="o">);</span>
+        <span class="o">}</span>
+      <span class="o">});</span>
+</code></pre>
+
+<p><font color="#158EDC">setGeolocation()</font>
+Установить геолокацию для сообщения. Первым параметром необходимо передать ID сообщения, вторым - latitude, третьим - longitude.</p>
+
+<p><font color="#158EDC">changeCategory()</font>
+Изменяет категорию сообщения. Первым параметром необходимо передать ID сообщения, вторым - id категории в формате int.</p>
+
+<p><font color="#158EDC">sendDeliveryReport()</font>
+Помечает сообщение как доставленное. Есть возможность либо 1 сообщение (в виде id), либо список сообщений с типом Message.</p>
+
+<p><font color="#158EDC">unregisterDevice()</font>
+Удаляет устройство. Сервис не будет отправлять уведомления на девайс и не позволит выполнить какие-либо запросы в API.</p>
+
+<blockquote>
+<p>Пример checkAuth:</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">mApi</span><span class="o">.</span><span class="na">checkAuth</span><span class="o">(</span><span class="k">new</span> <span class="n">SimpleJacksonRequestListener</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;()</span>
+        <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="n">onResponse</span><span class="o">(</span><span class="n">Boolean</span> <span class="n">status</span><span class="o">,</span> <span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="n">VolleyError</span> <span class="n">volleyError</span><span class="o">)</span>
+            <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">status</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+                    <span class="n">Logger</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="s">"authorized? "</span> <span class="o">+</span> <span class="n">status</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+</code></pre>
+
+<aside class="notice">После того как вызовете этот метод, необходимо вручную у объекта Auth сбросить авторизацию – для этого есть метод clearAuth(). Метод сотрет авторизацию из локального хранилища.</aside>
+
+<p><font color="#158EDC">checkAuth()</font>
+Проверяет, авторизовано ли данное устройство в сервисе. </p>
+
+<h2 id="3.6">FAQ</h2>
+
+<p>Если не срабатывает</p>
+
+<p><code>controller.setRegistrationListener(new PushController.GCMRegistrationListener()</code></p>
+
+<ul>
+<li>проверить, правильно ли указаны все ключи;</li>
+<li>проверить, правильно ли указаны все данные в манифесте;</li>
+<li>включить логи, вызвав Logger.enableLog(), и посмотреть лог в консоли.</li>
+</ul>
+
+<p><br></p>
+
+<p>Для регистрации в GCM есть слушатель на случай ошибки?</p>
+
+<p>Если использовать <code>controller.setRegistrationListener(new PushController.GCMRegistrationListener()</code>, то там есть такой слушатель.</p>
+
+<h1 id="4">iOS</h1>
+
+<p>Минимальная версия iOS 8.0. Все данные в callback-блоках функций SDK (сообщения и пр.) представлены в JSON формате. Все запросы вызываются методами объекта - <font color="#158EDC">singletone:TimAPISDK</font>.</p>
+
+<p>Ключ API при регистрации в сервисе выдается по запросу.</p>
+
+<h2 id="4.1">Требования</h2>
+
+<p>Для использования PUSH-уведомлений необходимо создать PUSH сертификат в Developer аккаунте Apple для используемого приложения. Данный сертификат необходимо передать в TIM Connect для подписи отправляемых уведомлений и сообщить bundleid приложения (например, com.timconnect.Tim). В случае отсутствия данного сертификата получение PUSH-уведомлений с SDK невозможна.</p>
+
+<h2 id="4.2">Создание сертификата</h2>
+
+<p>Сертификат создается в <a href=https://developer.apple.com/> Apple Developer Console </a>. В разделе <font color="#14CB79">Certificates, Identifiers &amp; Profiles</font> нужно создать <font color="#14CB79">Production</font> сертификат <font color="#14CB79">Apple Push Notification service SSL (Sandbox &amp; Production)</font> и выбрать APP ID приложения. Полученный сертификат скачать и открыть в Keychain. Во вкладке My Certificates нужно развернуть сертификат, выделить всё содержимое и с помощью контекстного меню экспортировать в .p12 файл. Затем конвертировать в .pem командой:</p>
+
+<p><code>openssl pkcs12 -in имя<em>сертификата.p12 -out имя</em>сертификата.pem -nodes -clcerts</code></p>
+
+<p><img width=320 src=images/iossert.png></p>
+
+<p>Можно воспользоваться утилитой <a href=https://github.com/KnuffApp/Knuff>Knuff</a>, которая выполнит все эти действия автоматически.</p>
+
+<h2 id="4.3">Запрос регистрации</h2>
+
+<p>Для доступа к контенту клиенту необходимо пройти процедуру регистрации. Для регистрация доступны два запроса: с кодом подтверждения по SMS и без. </p>
+
+<p><img src=images/reg.png></p>
+
+<blockquote>
+<p>Пример ответа (responseJson):</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+</span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w"> 
+</span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sent SMS activation code to 89991234567"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Регистрация с кодом подтверждения по SMS происходит в 2 этапа: сначала делается запрос на регистрацию указанного номера телефона, затем клиент подтверждает аутентификацию одноразовым паролем, высланным на его номер телефона. В случае успешного запроса регистрации клиент получит SMS с кодом подтверждения (4 цифры):</p>
+
+<p><code>registationWithPhone:(NSString *)phoneNumber
+           <br> block:(void (^)(NSDictionary *responseJson,NSError *error))block;
+</code></p>
+
+<p>В ответ сервер создаст пароль, который будет сохранен в связке ключей для последующей авторизации. Авторизация вызывается автоматически, используя сохраненные данные:<br></p>
+
+<p><code>
+confirmWithPhone:(NSString *)phoneNumber<br>
+code:(NSString *)smsCode<br>
+block:(void (^)(BOOL success, NSError *error))block;
+</code></p>
+
+<p><font color="#158EDC">phoneNumer</font> - телефон переданный в первом запросе и <font color="#158EDC">smsCode</font> полученный с ввода юзером на экране авторизации. В блоке есть переменная <font color="#158EDC">success</font>, которая сообщает о статусе авторизации после ответа от сервера.</p>
+
+<p>Регистрация без кода подтверждения по SMS выполняется методом:</p>
+
+<blockquote>
+<p>Пример ответа от сервера (JSON):</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Registration succsesful"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"sessionid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c4vddk63g5wen7arfhjqlc7t7m7b7b7b"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16HYnQYFD0dtlb7XoG4G4G4egQmc9hwFvD61MNkFl"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><code>
+registerWithoutSms:(NSString*)digest<br>
+phoneNumber:(NSString*)phoneNumber<br>
+block:(void (^)(NSDictionary *responseJson, NSError *error))block;
+</code></p>
+
+<p><font color="#158EDC">digest</font> – подпись для верификации запроса на стороне TIM Connect;
+<font color="#158EDC">phoneNumer</font> – номер телефона пользователя;</p>
+
+<p><br><br>
+Алгоритм формирования подписи <font color="#158EDC">digest</font> (SHA256) предоставляется по запросу.</p>
+
+<h2 id="4.4">Обработка сообщений</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w"> 
+        </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"14"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"geotag"</span><span class="p">:{</span><span class="w">
+            </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55.74722"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"37.53691"</span><span class="w">
+                  </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"hashtag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Try"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"94419856"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello, world!"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"receiver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"79991234567"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIMCONNECT"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-03 13:31:34+03:00"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Модель представлена в виде JSON. Содержит:<br></p>
+
+<ul>
+<li>Id – уникальный идентификатор сообщения (BIGINT)</li>
+<li>sender – отправитель (номер телефона или идентификатор отправителя)</li>
+<li>receiver – получатель (номер телефона)</li>
+<li>category – категория СМС по умолчанию с учетом статистики</li>
+<li>message – тело СМС сообщения</li>
+<li>timestamp – время добавления СМС сообщения в очередь</li>
+<li>hashtag – текст хэштега</li>
+<li>geotag – широта и долгота локации</li>
+<li>category – категория</li>
+</ul>
+
+<h2 id="4.5">Обработка очереди новых сообщений</h2>
+
+<p>Блок функции возвращает массив новых сообщений, не подтвержденных клиентом как полученные. </p>
+
+<p><code>getMessagesQueueWithBlock:(void (^)(NSArray *messages, NSError *error))block;</code></p>
+
+<p><font color="#158EDC">NSArray *messages</font> - содержит в себе сообщения в JSON формате(см. выше)</p>
+
+<aside class="notice">Рекомендуемый алгоритм: запрос новых сообщений -> сохранение в базе данных -> подтверждение доставки (confirmMessages[ids]).
+</aside>
+
+<h2 id="4.6">История сообщений</h2>
+
+<p>Блок функции возвращает массив прочитанных сообщений в интервале между заданными датами.<br>
+Подтверждение доставки не требуется, так как данные сообщения уже были получены пользователем.</p>
+
+<aside class="notice">Рекомендуемый алгоритм: запрос сообщений -> сохранение в базе данных. Рекомендуется использовать исключительно для восстановления архива сообщений при начальной установке приложения. </aside>
+
+<p><code>getMessagesFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate<br>
+         withBlock:(void (^)(NSArray *messages, NSError *error))block;</code></p>
+
+<p><font color="#158EDC">NSArray *messages</font> - содержит в себе сообщения в <font color="#14CB79">JSON</font> формате (см. выше).</p>
+
+<p>В случае необходимости получить список всех сообщений, можно воспользоваться методом:<br></p>
+
+<p><code>restoreMessagesWithBlock:(void (^)(NSArray *messages, NSError *error))block;</code></p>
+
+<p><font color="#158EDC">NSArray *messages</font> - содержит в себе сообщения в <font color="#14CB79">JSON</font> формате (см. выше).</p>
+
+<h2 id="4.7">Запрос конкретного сообщения</h2>
+
+<p>При необходимости получения информации о конкретном сообщении можно воспользоваться методом:<br></p>
+
+<p><code>getMessageWithId:(NSNumber *)messageId<br>
+block:(void (^)(NSDictionary *message, NSError *error))block;</code></p>
+
+<p><font color="#158EDC">NSArray *messages</font> - содержит в себе сообщения в <font color="#14CB79">JSON</font> формате (см. выше).</p>
+
+<h2 id="4.8">Подтверждение доставки</h2>
+
+<p>При получении новых сообщений (из очереди новых сообщений или при помощи PUSH-уведомления) клиент должен подтвердить получение этих сообщений. После получения подтверждения, сервис помещает сообщения из очереди в архив. Отправка подтверждения о доставки – критично важный этап обработки уведомлений, так как если сервер не получил отчет о доставке в заданный сервисом период, отправляется дублирующее SMS.<br></p>
+
+<blockquote>
+<p>Пример ответа (responseJson:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w"> </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Для подтверждения доставки одного сообщения используется следующий метод:</p>
+
+<p><br>
+<code>confirmMessageDelivery:(NSInteger)messageID
+block:(void (^)(NSDictionary *responseJson, NSError *error))block
+</code></p>
+
+<p><br><br><br></p>
+
+<blockquote>
+<p>Пример ответа (responseJson):</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w"> </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Для подтверждения двух и более сообщений используется метод:<br></p>
+
+<p><code>confirmMessages:(NSArray *)messagesIDs
+block:(void (^)(NSDictionary *responseJson, NSError *error))block;</code></p>
+
+<p>Тип <font color="#158EDC">messagesIDs</font> – «int array».</p>
+
+<h2 id="4.9">Изменение категории сообщения</h2>
+
+<blockquote>
+<p>Пример ответа (responseJson)</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w"> </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Для изменения типа категории для сообщения используется метод:<br></p>
+
+<p><code>updateMessageCategory:(NSInteger)messageID
+newCategoryID:(NSInteger)categoryID
+block:(void (^)(NSDictionary *responseJson, NSError *error))block
+</code></p>
+
+<h2 id="5.10">Сохранение/изменение гео-локации</h2>
+
+<blockquote>
+<p>Пример ответа (responseJson)</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w"> </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Для изменения геолокации для сообщения используется метод:<br></p>
+
+<p><code>(void)updateMessageGeotag:(float) latitude<br>
+longtitude:(float) longtitude<br>
+messageID:(NSInteger) messageID<br>
+block:(void (^)(NSDictionary *responseJson, NSError *error))block
+</code></p>
+
+<h2 id="5.11">Сохранение/изменение &quot;хэштега&rdquo;</h2>
+
+<blockquote>
+<p>Пример ответа (responseJson)</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w"> </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Для изменения или установки «хэштега» для сообщения используется метод:<br></p>
+
+<p><code>updateMessageHashtag:(NSInteger)messageID<br>
+hashtag:(NSString *)hashtag<br>
+block:(void (^)(NSDictionary *responseJson, NSError *error))block
+</code></p>
+
+<h2 id="5.12">Проверка статуса регистрации</h2>
+
+<blockquote>
+<p>Пример ответа (responseJson)</p>
+</blockquote>
+<pre class="highlight plaintext"><code>isAuth == YES or NO 
+</code></pre>
+
+<p>Проверяет, авторизовано ли данное устройство в сервисе. <br></p>
+
+<p><code>(void)checkAuthState:(void (^)(BOOL isAuth, NSError *error))block;</code></p>
+
+<h2 id="5.13">Удаление девайса</h2>
+
+<blockquote>
+<p>Пример ответа (responseJson)</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w"> </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Удаляет устройство. Сервис не будет отправлять уведомления на девайс и не позволит выполнить какие-либо запросы в API.<br></p>
+
+<p><code>(void)logOut:(void (^)(NSDictionary *responseJson, NSError *error))block;</code></p>
+
+<h2 id="5.14">VoIP-Сервис</h2>
+
+<p>Для совершения исходящего или принятия входящего звонка необходимо зарегистрироваться на VOIP-сервере.<br></p>
+
+<p>Получение одноразового пароля для регистрации:<br>
+<code>(void) getPasswordForCall:(void (^)(NSDictionary <em>responseJson, NSError *error))block;</code><br>
+Регистрация:<br>
+<code>(void) registerInVoIPService:(NSString</em>) password<br>
+block:(void (^)(BOOL registered))block;
+</code><br>
+Данный метод возвращает состояние регистрации на VOIP-сервере. После успешной регистрации можно принять или совершить звонок. <br><br></p>
+
+<p>Для принятия звонка необходимо использовать метод делегата, который вызывается при входящем звонке:
+<code>(void) incommingCallHandle;</code><br>
+Отнаследовавшись от него, можно принять или отклонить звонок, используя методы:<br>
+<code>(void) answerIncommingCall;<br>
+(void) hangUpIncommingCall;</code><br></p>
+
+<p>Метод, который включает в себя регистрацию и совершение звонка на необходимый номер:<br>
+<code>(void) startCallOnNumberWithRegister:(NSString *) number;</code><br><br><br><br></p>
+
+<p>Номер телефона передается в формате «74953693038».<br>
+При успешном выполнении метода начнется звонок на PSTN-телефонию с указанным номером.</p>
+
+<h2 id="5.15">Звонок из Web в приложение</h2>
+
+<p>Служебная функция, которая позволяет осуществить звонок из веб-браузера в приложение.</p>
+
+<blockquote>
+<p>Пример содержания dict:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="nt">"SIN"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="nt">"aps"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"alert"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w"> </span><span class="nt">"content-available"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span><span class="w"> 
+</span><span class="nt">"call_info"</span><span class="p">:</span><span class="w"> 
+</span><span class="p">{</span><span class="nt">"caller"</span><span class="p">:</span><span class="w"> </span><span class="s2">"login"</span><span class="p">,</span><span class="w"> </span><span class="nt">"asteriskpass"</span><span class="p">:</span><span class="s2">"password"</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Перейдите по адресу <a href=https://smpp.tim-connect.com/callclient/index.html>https://smpp.tim-connect.com/callclient/index.html</a> и введите номер телефона клиента. Логин и пароль для звонка выдается по запросу. </p>
+
+<p>Через несколько секунд придет PUSH-уведомление о входящем звонке в метод делегата:
+<code>(void) incommingPushPayload:(NSDictionary *) dict;</code>
+Следующим шагом необходимо зарегистрироваться на VOIP-сервере, используя логику описанную в предыдущем разделе, и принять звонок. Так же можно сразу использовать пароль для регистрации из payload’а PUSH-уведомления.</p>
+
+<h1 id="6">Дополнительная информация</h1>
+
+<p>При перерегистрации пользователю приходит SMS-оповещение:<br><br>
+<aside class="success">«Внимание! Мобильное приложение на устройстве, привязанном к номеру 79261234567, было переустановлено! Если это сделали не Вы, обратитесь в службу поддержки 8-495-369-30-38»</aside><br><br></p>
+
+<p>Если система считает пользователя активным на данный момент, то при повторной его регистрации отправляется на номер телефона указанное SMS. Имя отправителя используется конкретного клиента, текст сообщения конфигурируется администратором TIM Connect.</p>
+
+<aside class="notice">Для изменения API ключа сервиса TIM для зарегистрированного клиента (номера телефона) необходимо заново выполнить процедуру регистрации.</aside>
+
           <h1 id="errors">Errors</h1>
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
+<p>Когда какой-либо из запросов не выполнен в результате возникновения ошибки, в теле ответа содержится детализация ошибки в <font color="#14CB79">JSON</font> формате.</p>
+<pre class="highlight json"><code><span class="w">
+</span><span class="p">{</span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fail"</span><span class="p">,</span><span class="w"> </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Permission denied"</span><span class="p">,</span><span class="w"> </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">[]}</span><span class="w">
 
-<p>The Kittn API uses the following error codes:</p>
+
+
+</span><span class="p">{</span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fail"</span><span class="p">,</span><span class="w"> </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{'phone_number': ['Enter a valid mobile number.']}"</span><span class="p">}</span><span class="w">
+
+
+
+</span><span class="p">{</span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fail"</span><span class="p">,</span><span class="w"> </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ActivationCode matching query does not exist."</span><span class="p">}</span><span class="w">
+
+
+</span><span class="p">{</span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fail"</span><span class="p">,</span><span class="w"> </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Incorrect phone_number or credentials"</span><span class="p">,</span><span class="w"> 
+</span><span class="nt">"sessionid"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fail"</span><span class="p">,</span><span class="w"> </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"['ActivationCode does not exist or expire']"</span><span class="p">}</span><span class="w">
+
+
+</span><span class="p">{</span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fail"</span><span class="p">,</span><span class="w"> </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"That page contains no results"</span><span class="p">,</span><span class="w"> 
+</span><span class="nt">"paging"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">"page"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">},</span><span class="w"> </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">[]}</span><span class="w">
+
+
+</span><span class="p">{</span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fail"</span><span class="p">,</span><span class="w"> </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Device is blocked"</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fail"</span><span class="p">,</span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Device has no mobile app"</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
 <table><thead>
 <tr>
-<th>Error Code</th>
-<th>Meaning</th>
+<th>Ошибка</th>
+<th>Значение</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
+<td>Permission denied</td>
+<td>У пользователя недостаточно прав при обращении к ресурсу или истекло время жизни сессии.</td>
 </tr>
 <tr>
-<td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
+<td>Enter a valid mobile number</td>
+<td>Указан некорректный номер телефона.</td>
 </tr>
 <tr>
-<td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+<td>ActivationCode matching query does not exist</td>
+<td>Код активации мобильного устройства не найден.</td>
 </tr>
 <tr>
-<td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
+<td>Incorrect phone_number or credentials</td>
+<td>При попытке аутентификации указан не верный номер телефона или пароль в поле credentials.</td>
 </tr>
 <tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
+<td>ActivationCode does not exist or expire</td>
+<td>Не валидный код подтверждения.</td>
 </tr>
 <tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
+<td>That page contains no results</td>
+<td>Попытка запросить не существующую страницу.</td>
 </tr>
 <tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
+<td>Device is blocked</td>
+<td>На любой запрос авторизованного устройства, если он был заблокирован администратором.</td>
 </tr>
 <tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
+<td>Device has no mobile app</td>
+<td>Попытка выполнить запрос с удаленного приложения.</td>
+</tr>
+</tbody></table>
+
+          <h1 id="changelog">ChangeLog</h1>
+
+<table><thead>
+<tr>
+<th>Дата</th>
+<th>Версия</th>
+<th>Изменения</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>05.08.16</td>
+<td>1.7.1</td>
+<td>Добавлен тестовый проект для Android; исправление ошибок Android</td>
 </tr>
 <tr>
-<td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+<td>29.07.16</td>
+<td>1.7</td>
+<td>Добавлен метод удаления пользователя из сервиса; добавлен метод проверки авторизации; исправление ошибок для iOS</td>
 </tr>
 </tbody></table>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
+                <a href="#" data-language-name="code">code</a>
           </div>
       </div>
     </div>
